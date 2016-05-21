@@ -42,4 +42,5 @@ public class Program1 {
 		x[4] = 2;
 		System.out.println(NoCanHasSum(x));
 	}
+	//testing git sync
 }
