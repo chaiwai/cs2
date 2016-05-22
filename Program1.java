@@ -11,11 +11,11 @@ public class Program1 {
 			return 1;
 		else
 			for (int i = 0; i < array.length; i++){
-				min = min + array[i];
+				if (array[i] > min + 1)
+					return min + 1;
 				
-
+				min = min + array[i];
 			}
-		
 		
 		return min + 1;
 	}
@@ -52,5 +52,4 @@ public class Program1 {
 		System.out.println(NoCanHasSum(z));
 		System.out.println(NoCanHasSum(foo));
 	}
-	//testing git sync
 }
