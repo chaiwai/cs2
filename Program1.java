@@ -41,14 +41,16 @@ public class Program1 {
 	//delete main before submitting
 	//***
 	public static void main(String [] args){
-		int [] x = new int [5];
-		x[0] = 3;
-		x[1] = 4;
-		x[2] = 5;
-		//x[3] = 1;
-		//x[4] = 2;
+		//test cases from rubric
+		int[] x = {1,1,1,1,2};	//output = 7
+		int[] y = {3,4,5}; 		//output = 1
+		int[] z = {1,2,3,4,4};	//output = 15
+		int[] foo = {1,3,9};	//output = 2
 		
 		System.out.println(NoCanHasSum(x));
+		System.out.println(NoCanHasSum(y));
+		System.out.println(NoCanHasSum(z));
+		System.out.println(NoCanHasSum(foo));
 	}
 	//testing git sync
 }
