@@ -6,7 +6,10 @@ public class Program1 {
 // non-decreasing order. The array may contain duplicates.
 		
 		
-		for (int i = 0; i < array.length; i++)
+		for (int i = 0; i < array.length; i++){
+			
+			
+		}
 		
 		
 		
