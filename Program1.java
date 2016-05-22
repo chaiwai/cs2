@@ -12,6 +12,8 @@ public class Program1 {
 		else
 			for (int i = 0; i < array.length; i++){
 				min = min + array[i];
+				
+
 			}
 		
 		
@@ -40,9 +42,11 @@ public class Program1 {
 	//***
 	public static void main(String [] args){
 		int [] x = new int [5];
-		x[0] = 1;
-		x[1] = 3;
-		x[2] = 9;
+		x[0] = 3;
+		x[1] = 4;
+		x[2] = 5;
+		//x[3] = 1;
+		//x[4] = 2;
 		
 		System.out.println(NoCanHasSum(x));
 	}
