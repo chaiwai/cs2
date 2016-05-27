@@ -1,5 +1,4 @@
-// Sean Szumlanski
-// COP 3503, Spring 2016
+// info
 
 // BST.java
 // ========
