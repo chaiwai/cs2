@@ -22,7 +22,7 @@ class Node
 	}
 }
 
-public class BST
+public class GenericBST
 {
 	private Node root;
 
@@ -189,7 +189,7 @@ public class BST
 
 	public static void main(String [] args)
 	{
-		BST myTree = new BST();
+		GenericBST myTree = new GenericBST();
 
 		for (int i = 0; i < 5; i++)
 		{
