@@ -10,11 +10,13 @@
 import java.io.*;
 import java.util.*;
 
+//a binary search tree node class that holds any data type
 class Node
 {
 	int data;
 	Node left, right;
-
+	
+	//sets the data field to "data"
 	Node(int data)
 	{
 		this.data = data;
