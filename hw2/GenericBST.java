@@ -185,6 +185,16 @@ public class GenericBST
 		postorder(root.right);
 		System.out.print(" " + root.data);
 	}
+	
+	public static double difficultyRating()
+	{
+		return 2.5;
+	}
+	
+	public static double hoursSpent()
+	{
+		return 2.0;
+	}
 
 	public static void main(String [] args)
 	{
