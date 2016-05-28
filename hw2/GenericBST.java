@@ -10,7 +10,7 @@
 import java.io.*;
 import java.util.*;
 
-//a binary search tree node class that holds any data type
+// a binary search tree node class that holds any data type
 class Node
 {
 	int data;
@@ -23,10 +23,13 @@ class Node
 	}
 }
 
+// a binary search tree class that will hold any data type
 public class GenericBST
 {
 	private Node root;
 
+	// inserting the root node
+	// then calls a method to insert nodes
 	public void insert(int data)
 	{
 		root = insert(root, data);
