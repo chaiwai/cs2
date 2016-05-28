@@ -28,13 +28,14 @@ public class GenericBST
 {
 	private Node root;
 
-	// inserting the root node
+	// inserts the root node
 	// then calls a method to insert nodes
 	public void insert(int data)
 	{
 		root = insert(root, data);
 	}
 
+	// bst insertion method
 	private Node insert(Node root, int data)
 	{
 		if (root == null)
