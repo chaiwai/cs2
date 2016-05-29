@@ -26,6 +26,7 @@ class Node
 // a binary search tree class that will hold any data type
 public class GenericBST
 {
+	// come back to this //
 	private Node root;
 
 	// inserts the root node
@@ -38,6 +39,7 @@ public class GenericBST
 	// bst insertion method
 	private Node insert(Node root, int data)
 	{
+		// if the bst is empty
 		if (root == null)
 		{
 			return new Node(data);
