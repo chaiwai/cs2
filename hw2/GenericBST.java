@@ -36,18 +36,22 @@ public class GenericBST
 		root = insert(root, data);
 	}
 
-	// bst insertion method
+	// bst insertion method:
+	// determines recursively if a node should go to 
+	// the left or right
 	private Node insert(Node root, int data)
 	{
-		// if the bst is empty
+		// if the bst is empty, a root node is set
 		if (root == null)
 		{
 			return new Node(data);
 		}
+		// if the new node is <, it is placed to the left
 		else if (data < root.data)
 		{
 			root.left = insert(root.left, data);
 		}
+		// if the new node is >, it is placed to the right
 		else if (data > root.data)
 		{
 			root.right = insert(root.right, data);
@@ -59,28 +63,36 @@ public class GenericBST
 			;
 		}
 
+		// not sure yet
 		return root;
 	}
 
+	// method for removing nodes
 	public void delete(int data)
 	{
 		root = delete(root, data);
 	}
 
+	// recursively determines how to reorganize the bst
+	// after a node is deleted
 	private Node delete(Node root, int data)
 	{
+		// returns null if the bst is empty
 		if (root == null)
 		{
 			return null;
 		}
+		// deletes to the left if data is < the current node
 		else if (data < root.data)
 		{
 			root.left = delete(root.left, data);
 		}
+		// deletes to the right if data is > the current node
 		else if (data > root.data)
 		{
 			root.right = delete(root.right, data);
 		}
+		// instructions when the program reaches the end of a bst
 		else
 		{
 			if (root.left == null && root.right == null)
