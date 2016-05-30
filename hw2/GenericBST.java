@@ -140,7 +140,8 @@ public class GenericBST
 	{
 		return contains(root, data);
 	}
-
+	
+	// recursively checks for values on both sides of a node
 	private boolean contains(Node root, int data)
 	{
 		if (root == null)
@@ -163,16 +164,20 @@ public class GenericBST
 
 	public void inorder()
 	{
+		// header line
 		System.out.print("In-order Traversal:");
 		inorder(root);
 		System.out.println();
 	}
 
+	// recursively looks for node values and prints in inorder
 	private void inorder(Node root)
 	{
+		// returns if bst is empty
 		if (root == null)
 			return;
 
+		// checks left, prints, checks right
 		inorder(root.left);
 		System.out.print(" " + root.data);
 		inorder(root.right);
@@ -187,9 +192,11 @@ public class GenericBST
 
 	private void preorder(Node root)
 	{
+		//returns if root is empty
 		if (root == null)
 			return;
 
+		// prints, checks left, then checks right
 		System.out.print(" " + root.data);
 		preorder(root.left);
 		preorder(root.right);
@@ -204,14 +211,17 @@ public class GenericBST
 
 	private void postorder(Node root)
 	{
+		// returns if bst is empty
 		if (root == null)
 			return;
 
+		// checks left, checks right, then prints
 		postorder(root.left);
 		postorder(root.right);
 		System.out.print(" " + root.data);
 	}
 	
+	// method for gathering course feedback?
 	public static double difficultyRating()
 	{
 		return 2.5;
@@ -226,6 +236,7 @@ public class GenericBST
 	{
 		GenericBST myTree = new GenericBST();
 
+		// inserts 5 random integers from [1,100] into the bst
 		for (int i = 0; i < 5; i++)
 		{
 			int r = (int)(Math.random() * 100) + 1;
@@ -233,6 +244,7 @@ public class GenericBST
 			myTree.insert(r);
 		}
 
+		// calls 3 different methods for 3 different bst traversals
 		myTree.inorder();
 		myTree.preorder();
 		myTree.postorder();
