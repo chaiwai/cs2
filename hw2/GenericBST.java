@@ -1,6 +1,6 @@
 // info
 
-// BST.java
+// GenericsBST.java
 // ========
 // Basic binary search tree (BST) implementation that supports insert() and
 // delete() operations. This framework is provide for you to modify as part of
@@ -94,19 +94,24 @@ public class GenericBST
 		}
 		// instructions when the program reaches the end of a bst
 		else
-		{
+		{	
+			// when a node has no child, return null
 			if (root.left == null && root.right == null)
 			{
 				return null;
 			}
+			// return the lhs if the rhs is null
 			else if (root.right == null)
 			{
 				return root.left;
 			}
+			// return the rhs if the lhs is null
 			else if (root.left == null)
 			{
 				return root.right;
 			}
+			// finds the right-most node on the left node
+			// then sets that data, then deletes the left 
 			else
 			{
 				root.data = findMax(root.left);
@@ -123,6 +128,7 @@ public class GenericBST
 	{
 		while (root.right != null)
 		{
+			// keeps moving to the right node until the right node is null
 			root = root.right;
 		}
 
