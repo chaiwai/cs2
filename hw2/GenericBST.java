@@ -11,27 +11,27 @@ import java.io.*;
 import java.util.*;
 
 // a binary search tree node class that holds any data type
-class Node
+class Node<AnyType implements Comparable<AnyType>> 
 {
-	int data;
-	Node left, right;
+	AnyType data;
+	Node<AnyType> left, right;
 	
 	//sets the data field to "data"
-	Node(int data)
+	Node(AnyType data)
 	{
 		this.data = data;
 	}
 }
 
 // a binary search tree class that will hold any data type
-public class GenericBST
+public class GenericBST<AnyType implements Comparable<AnyType>> 
 {
 	// come back to this //
-	private Node root;
+	private Node<AnyType> root;
 
 	// inserts the root node
 	// then calls a method to insert nodes
-	public void insert(int data)
+	public void insert(AnyType data)
 	{
 		root = insert(root, data);
 	}
@@ -39,7 +39,7 @@ public class GenericBST
 	// bst insertion method:
 	// determines recursively if a node should go to 
 	// the left or right
-	private Node insert(Node root, int data)
+	private Node<AnyType> insert(Node<AnyType> root, AnyType data)
 	{
 		// if the bst is empty, a root node is set
 		if (root == null)
@@ -60,6 +60,7 @@ public class GenericBST
 		{
 			// Stylistically, I have this here to explicitly state that we are
 			// disallowing insertion of duplicate values. This is unconventional.
+			// and it's fancy :)
 			;
 		}
 
@@ -68,14 +69,14 @@ public class GenericBST
 	}
 
 	// method for removing nodes
-	public void delete(int data)
+	public void delete(AnyType data)
 	{
 		root = delete(root, data);
 	}
 
 	// recursively determines how to reorganize the bst
 	// after a node is deleted
-	private Node delete(Node root, int data)
+	private Node delete(Node root, AnyType data)
 	{
 		// returns null if the bst is empty
 		if (root == null)
@@ -124,7 +125,7 @@ public class GenericBST
 
 	// This method assumes root is non-null, since this is only called by
 	// delete() on the left subtree, and only when that subtree is non-empty.
-	private int findMax(Node root)
+	private AnyType findMax(Node root)
 	{
 		while (root.right != null)
 		{
@@ -136,13 +137,13 @@ public class GenericBST
 	}
 
 	// Returns true if the value is contained in the BST, false otherwise.
-	public boolean contains(int data)
+	public boolean contains(AnyType data)
 	{
 		return contains(root, data);
 	}
 	
 	// recursively checks for values on both sides of a node
-	private boolean contains(Node root, int data)
+	private boolean contains(Node root, AnyType data)
 	{
 		if (root == null)
 		{
