@@ -234,21 +234,21 @@ public class GenericBST<AnyType extends Comparable<AnyType>>
 		return 2.0;
 	}
 
-	public static void main(String [] args)
-	{
-		GenericBST<AnyType> myTree = new GenericBST<AnyType>();
+//	public static void main(String [] args)
+//	{
+//		GenericBST<AnyType> myTree = new GenericBST<AnyType>();
 
-		// inserts 5 random integers from [1,100] into the bst
-		for (int i = 0; i < 5; i++)
-		{
-			int r = (int)(Math.random() * 100) + 1;
-			System.out.println("Inserting " + r + "...");
-			myTree.insert(r);
-		}
+//		// inserts 5 random integers from [1,100] into the bst
+//		for (int i = 0; i < 5; i++)
+//		{
+//			int r = (int)(Math.random() * 100) + 1;
+//			System.out.println("Inserting " + r + "...");
+//			myTree.insert(r);
+//		}
 
-		// calls 3 different methods for 3 different bst traversals
-		myTree.inorder();
-		myTree.preorder();
-		myTree.postorder();
-	}
+//		// calls 3 different methods for 3 different bst traversals
+//		myTree.inorder();
+//		myTree.preorder();
+//		myTree.postorder();
+//	}
 }
