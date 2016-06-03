@@ -24,9 +24,10 @@ class Node<AnyType>
 }
 
 // a binary search tree class that will hold any data type
+// we are extending the Comparable interface to use its compareTo method
 public class GenericBST<AnyType extends Comparable<AnyType>>
 {
-	// come back to this //
+	// honestly, I don't know why this is here
 	private Node<AnyType> root;
 
 	// inserts the root node
@@ -48,6 +49,8 @@ public class GenericBST<AnyType extends Comparable<AnyType>>
 			return new Node<AnyType> (data);
 		}
 		// if the new node is <, it is placed to the left
+		// using the compareTo method, if data is less than root.data
+		// it will return a negative #
 		else if (data.compareTo(root.data) < 0 )
 		{
 			root.left = insert(root.left, data);
@@ -65,7 +68,6 @@ public class GenericBST<AnyType extends Comparable<AnyType>>
 			;
 		}
 
-		// not sure yet
 		return root;
 	}
 
@@ -150,10 +152,12 @@ public class GenericBST<AnyType extends Comparable<AnyType>>
 		{
 			return false;
 		}
+		// if data is less than root.data, look left
 		else if (data.compareTo(root.data) < 0 )
 		{
 			return contains(root.left, data);
 		}
+		//if data is greater than root.data, look right
 		else if (data.compareTo(root.data) > 0 )
 		{
 			return contains(root.right, data);
@@ -166,7 +170,6 @@ public class GenericBST<AnyType extends Comparable<AnyType>>
 
 	public void inorder()
 	{
-		// header line
 		System.out.print("In-order Traversal:");
 		inorder(root);
 		System.out.println();
@@ -226,12 +229,12 @@ public class GenericBST<AnyType extends Comparable<AnyType>>
 	// method for gathering course feedback?
 	public static double difficultyRating()
 	{
-		return 2.5;
+		return 1.9;
 	}
 	
 	public static double hoursSpent()
 	{
-		return 2.0;
+		return 4.0;
 	}
 
 //	public static void main(String [] args)
