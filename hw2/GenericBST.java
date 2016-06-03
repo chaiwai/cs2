@@ -45,7 +45,7 @@ public class GenericBST<AnyType extends Comparable<AnyType>>
 		if (root == null)
 		{
 			//instantiates a new node with data
-			return new Node(data);
+			return new Node<AnyType> (data);
 		}
 		// if the new node is <, it is placed to the left
 		else if (data.compareTo(root.data) < 0 )
@@ -77,7 +77,7 @@ public class GenericBST<AnyType extends Comparable<AnyType>>
 
 	// recursively determines how to reorganize the bst
 	// after a node is deleted
-	private Node delete(Node root, AnyType data)
+	private Node<AnyType> delete(Node<AnyType> root, AnyType data)
 	{
 		// returns null if the bst is empty
 		if (root == null)
@@ -85,12 +85,12 @@ public class GenericBST<AnyType extends Comparable<AnyType>>
 			return null;
 		}
 		// deletes to the left if data is < the current node
-		else if (data < root.data)
+		else if (data.compareTo(root.data) < 0 )
 		{
 			root.left = delete(root.left, data);
 		}
 		// deletes to the right if data is > the current node
-		else if (data > root.data)
+		else if (data.compareTo(root.data) > 0 )
 		{
 			root.right = delete(root.right, data);
 		}
@@ -126,7 +126,7 @@ public class GenericBST<AnyType extends Comparable<AnyType>>
 
 	// This method assumes root is non-null, since this is only called by
 	// delete() on the left subtree, and only when that subtree is non-empty.
-	private AnyType findMax(Node root)
+	private AnyType findMax(Node<AnyType> root)
 	{
 		while (root.right != null)
 		{
@@ -144,17 +144,17 @@ public class GenericBST<AnyType extends Comparable<AnyType>>
 	}
 	
 	// recursively checks for values on both sides of a node
-	private boolean contains(Node root, AnyType data)
+	private boolean contains(Node<AnyType> root, AnyType data)
 	{
 		if (root == null)
 		{
 			return false;
 		}
-		else if (data < root.data)
+		else if (data.compareTo(root.data) < 0 )
 		{
 			return contains(root.left, data);
 		}
-		else if (data > root.data)
+		else if (data.compareTo(root.data) > 0 )
 		{
 			return contains(root.right, data);
 		}
@@ -173,7 +173,7 @@ public class GenericBST<AnyType extends Comparable<AnyType>>
 	}
 
 	// recursively looks for node values and prints in inorder
-	private void inorder(Node root)
+	private void inorder(Node<AnyType> root)
 	{
 		// returns if bst is empty
 		if (root == null)
@@ -192,7 +192,7 @@ public class GenericBST<AnyType extends Comparable<AnyType>>
 		System.out.println();
 	}
 
-	private void preorder(Node root)
+	private void preorder(Node<AnyType> root)
 	{
 		//returns if root is empty
 		if (root == null)
@@ -211,7 +211,7 @@ public class GenericBST<AnyType extends Comparable<AnyType>>
 		System.out.println();
 	}
 
-	private void postorder(Node root)
+	private void postorder(Node<AnyType> root)
 	{
 		// returns if bst is empty
 		if (root == null)
@@ -236,7 +236,7 @@ public class GenericBST<AnyType extends Comparable<AnyType>>
 
 	public static void main(String [] args)
 	{
-		GenericBST myTree = new GenericBST();
+		GenericBST<AnyType> myTree = new GenericBST<AnyType>();
 
 		// inserts 5 random integers from [1,100] into the bst
 		for (int i = 0; i < 5; i++)
