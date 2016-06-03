@@ -11,7 +11,7 @@ import java.io.*;
 import java.util.*;
 
 // a binary search tree node class that holds any data type
-class Node<AnyType implements Comparable<AnyType>> 
+class Node<AnyType>
 {
 	AnyType data;
 	Node<AnyType> left, right;
@@ -24,7 +24,7 @@ class Node<AnyType implements Comparable<AnyType>>
 }
 
 // a binary search tree class that will hold any data type
-public class GenericBST<AnyType implements Comparable<AnyType>> 
+public class GenericBST<AnyType extends Comparable<AnyType>>
 {
 	// come back to this //
 	private Node<AnyType> root;
@@ -44,15 +44,16 @@ public class GenericBST<AnyType implements Comparable<AnyType>>
 		// if the bst is empty, a root node is set
 		if (root == null)
 		{
+			//instantiates a new node with data
 			return new Node(data);
 		}
 		// if the new node is <, it is placed to the left
-		else if (data < root.data)
+		else if (data.compareTo(root.data) < 0 )
 		{
 			root.left = insert(root.left, data);
 		}
 		// if the new node is >, it is placed to the right
-		else if (data > root.data)
+		else if (data.compareTo(root.data) > 0 )
 		{
 			root.right = insert(root.right, data);
 		}
