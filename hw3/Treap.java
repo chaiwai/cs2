@@ -15,6 +15,9 @@ class Node<T>
 
 public class Treap<T extends Comparable<T>>
 {
+	private int size = 0;
+	private Node<T> root;	
+	
 //	Add data to the treap. Do not allow insertion of duplicate values. You will have to generate a
 //	random priority for this node. Find an efficient way to ensure that no duplicate priorities are
 //	generated, which uses no more than O(n) extra memory.
@@ -41,7 +44,7 @@ public class Treap<T extends Comparable<T>>
 	public boolean contains(T data)
 	{
 		
-		return false;
+		return false; // change
 	}
 	
 //	Return the number of elements in the treap in O(1) time.
@@ -57,6 +60,11 @@ public class Treap<T extends Comparable<T>>
 		return 0; // change
 	}
 	
+	public Node<T> getRoot()
+	{
+		return root;
+	}
+	
 	public static double difficultyRating()
 	{
 		return 3.0; // change
@@ -67,5 +75,9 @@ public class Treap<T extends Comparable<T>>
 		return 3.0; // change
 	}
 	
+	public static void main (String [] args)
+	{
+	
+	}
 
 }
