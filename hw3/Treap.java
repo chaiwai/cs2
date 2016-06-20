@@ -2,6 +2,8 @@
 
 //Implement the probabilistic Treap data structure. It is important that you implement the insertion and deletion operations as described in class. (In particular, be sure to read my note in Webcourses on how deletion is handled, which includes a discussion of how this differs from our traditional approach to BST deletion.) Your Treap class must be generic. Since there is an ordering property in treaps, you must also restrict the type parameter (e.g., AnyType) to classes that implement Comparable.
 
+import java.util.HashSet;
+
 class Node<T>
 {
 	T data;
@@ -19,9 +21,12 @@ public class Treap<T extends Comparable<T>>
 {
 	private int size = 0;
 	private Node<T> root;
-	//hashset maybe?
+	HashSet<Integer> prioritySet;
 	
-	//constructor?
+	public Treap()
+	{
+		prioritySet = new HashSet<Integer>();
+	}
 	
 //	Add data to the treap. Do not allow insertion of duplicate values. You will have to generate a
 //	random priority for this node. Find an efficient way to ensure that no duplicate priorities are
@@ -51,20 +56,36 @@ public class Treap<T extends Comparable<T>>
 		// if the bst is empty, a root node is set
 		if (root == null)
 		{
-			//instantiates a new node with data
-			return new Node<AnyType> (data);
+			//instantiates a new node with data and increments treap size
+			this.size++;
+			return new Node<T> (data, priority);
 		}
-		// if the new node is <, it is placed to the left
-		// using the compareTo method, if data is less than root.data
-		// it will return a negative #
+		// if the new node is <, it is placed to the left using the compareTo method
+		// if data is less than root.data it will return a negative #
 		else if (data.compareTo(root.data) < 0 )
 		{
-			root.left = insert(root.left, data);
+			root.left = add(root.left, data, priority);
+			// rotation
+			if (root.left.priority < root.priority)
+			{
+				Node<T> child = root.left;
+				root.left = child.right;
+				child.right = root;
+				root = child;
+			}
 		}
 		// if the new node is >, it is placed to the right
 		else if (data.compareTo(root.data) > 0 )
 		{
-			root.right = insert(root.right, data);
+			root.right = add(root.right, data, priority);
+			if (root.right.priority < root.priority)
+			{
+				Node<T> child = root.right;
+				root.right = child.left;
+				child.left = root;
+				root = child;
+			}
+
 		}
 		else
 		{
@@ -139,9 +160,9 @@ public class Treap<T extends Comparable<T>>
 	public int getPriority()
 	{
 		int priority = (int)(Math.random()*(Integer.MAX_VALUE - 1) + 1);
-		while (prioritySet.contains(priority)
+		while (prioritySet.contains(priority))
 			priority = (int)(Math.random()*(Integer.MAX_VALUE - 1) + 1);
-		prioritySet.add(priority)
+		prioritySet.add(priority);
 		return priority;
 	}
 	
