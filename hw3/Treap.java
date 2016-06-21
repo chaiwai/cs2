@@ -1,6 +1,10 @@
 // info
 
-//Implement the probabilistic Treap data structure. It is important that you implement the insertion and deletion operations as described in class. (In particular, be sure to read my note in Webcourses on how deletion is handled, which includes a discussion of how this differs from our traditional approach to BST deletion.) Your Treap class must be generic. Since there is an ordering property in treaps, you must also restrict the type parameter (e.g., AnyType) to classes that implement Comparable.
+/* indicates comments from program requirements */
+
+// indicates comments from the coder
+
+/* Implement the probabilistic Treap data structure. It is important that you implement the insertion and deletion operations as described in class. (In particular, be sure to read my note in Webcourses on how deletion is handled, which includes a discussion of how this differs from our traditional approach to BST deletion.) Your Treap class must be generic. Since there is an ordering property in treaps, you must also restrict the type parameter (e.g., AnyType) to classes that implement Comparable. */
 
 import java.util.*;
 import java.lang.Math;
@@ -111,28 +115,49 @@ public class Treap<T extends Comparable<T>>
 			root = remove(root, data);
 	}
 	
+	// nightmare method
 	private Node<T> remove(Node<T> root, T data)
 	{
 		if (root == null)
 			return null;
 		
+		// first step is to look for the node
+		// recursively search through branches
 		else if (data.compareTo(root.data) < 0)
 			root.left = remove(root.left, data);
 		else if (data.compareTo(root.data) > 0)
 			root.right = remove(root.right, data);
+		
+		// this else statement assumes the value is equal
+		// which means we found the node to delete
 		else
 		{
-			if (root.left == null && root.right == null)
-			
-			else if (root.left == null)
+			if (root.left == null)
+				return null;
 			
 			else if (root.right == null)
+				return null;
 			
+			// if both sides are null, then the node is a leaf node
+			// which means it can be removed after decrementing the size
+			// and removing the priority value
+			else if (root.left == null && root.right == null)
+			{
+				prioritySet.remove(root.priority);
+				size--;
+				return null;
+			}
+			
+			// if the node has two children
 			else
 			{
 				//priority rotations
+				return null;
 			}
+			
 		}
+		
+		return null;
 	}
 	
 	/* Return true if the treap contains data, false otherwise. */
@@ -181,9 +206,16 @@ public class Treap<T extends Comparable<T>>
 			int rightHeight = height(root.right);
 			
 			if (leftHeight < rightHeight)
-				return ++rightHeight;
+			{
+				rightHeight++;
+				return rightHeight;
+			}
+			
 			else
-				return ++leftHeight;
+			{
+				leftHeight++;
+				return leftHeight;
+			}
 		}
 	}
 	public Node<T> getRoot()
