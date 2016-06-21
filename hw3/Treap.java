@@ -22,6 +22,7 @@ class Node<T>
 	}
 }
 
+// extends Comparable to use compareTo()
 public class Treap<T extends Comparable<T>>
 {
 	private int size = 0;
@@ -96,8 +97,8 @@ public class Treap<T extends Comparable<T>>
 				child.left = root;
 				root = child;
 			}
-
 		}
+		
 		else
 		{
 			// this disallows duplicates
@@ -143,6 +144,9 @@ public class Treap<T extends Comparable<T>>
 				return null;
 			}
 			
+			// when the node has one child: rotate down in the opposite direction
+			// former left child of new node beomes new right child of parent, and repeat
+			
 			// when the node has a right child
 			else if (root.left == null)
 			{
@@ -163,7 +167,8 @@ public class Treap<T extends Comparable<T>>
 				root.right = remove(root.right, data);
 			}
 			
-			// if the node has two children
+			// if the node has two children: rotate in the opposite direction of the minimum child
+			// former left child of new node beomes new right child of parent, and repeat
 			else
 			{
 				if (root.right.priority > root.left.priority)
@@ -269,12 +274,13 @@ public class Treap<T extends Comparable<T>>
 	
 	public static double difficultyRating()
 	{
-		return 3.0; 
+		// if it weren't for the remove method, I'd rate it a 2.4
+		return 3.4; 
 	}
 	
 	public static double hoursSpent()
 	{
-		return 4.0; 
+		// if it weren't for the remove method, I'd have spent maybe 2 hours
+		return 5.0; 
 	}
-	
 }
