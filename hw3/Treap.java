@@ -125,6 +125,7 @@ public class Treap<T extends Comparable<T>>
 		// recursively search through branches
 		else if (data.compareTo(root.data) < 0)
 			root.left = remove(root.left, data);
+			
 		else if (data.compareTo(root.data) > 0)
 			root.right = remove(root.right, data);
 		
@@ -132,32 +133,61 @@ public class Treap<T extends Comparable<T>>
 		// which means we found the node to delete
 		else
 		{
-			if (root.left == null)
-				return null;
-			
-			else if (root.right == null)
-				return null;
-			
 			// if both sides are null, then the node is a leaf node
 			// which means it can be removed after decrementing the size
 			// and removing the priority value
-			else if (root.left == null && root.right == null)
+			if (root.left == null && root.right == null)
 			{
 				prioritySet.remove(root.priority);
 				size--;
 				return null;
 			}
 			
+			// when the node has a right child
+			else if (root.left == null)
+			{
+				Node<T> child = root.right;
+				root.right = child.left;
+				child.left = root;
+				root = child;
+				root.left = remove(root.left, data);
+			}
+			
+			// when the node has a left child
+			else if (root.right == null)
+			{
+				Node<T> child = root.left;
+				root.left = child.right;
+				child.right = root;
+				root = child;
+				root.right = remove(root.right, data);
+			}
+			
 			// if the node has two children
 			else
 			{
-				//priority rotations
-				return null;
+				if (root.right.priority > root.left.priority)
+				{
+					Node<T> child = root.left;
+					root.left = child.right;
+					child.right = root;
+					root = child;
+					root.right = remove(root.right, data);
+				}
+				
+				else
+				{
+					Node<T> child = root.right;
+					root.right = child.left;
+					child.left = root;
+					root = child;
+					root.left = remove(root.left, data);
+
+				}
 			}
-			
 		}
 		
-		return null;
+		return root;
 	}
 	
 	/* Return true if the treap contains data, false otherwise. */
