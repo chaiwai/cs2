@@ -2,7 +2,8 @@
 
 //Implement the probabilistic Treap data structure. It is important that you implement the insertion and deletion operations as described in class. (In particular, be sure to read my note in Webcourses on how deletion is handled, which includes a discussion of how this differs from our traditional approach to BST deletion.) Your Treap class must be generic. Since there is an ordering property in treaps, you must also restrict the type parameter (e.g., AnyType) to classes that implement Comparable.
 
-import java.util.HashSet;
+import java.util.*;
+import java.lang.Math;
 
 class Node<T>
 {
@@ -100,10 +101,11 @@ public class Treap<T extends Comparable<T>>
 //	Delete data from the treap (if it is present).
 	public void remove(T data)
 	{
-		root = delete(root, data);
+		if (contains(root, data))
+			root = remove(root, data);
 	}
 	
-	private Node<T> delete(Node<T> root, T data)
+	private Node<T> remove(Node<T> root, T data)
 	{
 		return null; //for now
 	}
@@ -149,7 +151,19 @@ public class Treap<T extends Comparable<T>>
 	
 	public int height(Node<T> root)
 	{
-		return 0; //change
+		if (root == null)
+			return -1;
+		else
+		{
+			int leftHeight = height(root.left);
+			//System.out.println("left" + leftHeight);
+			int rightHeight = height(root.right);
+			
+			if (leftHeight < rightHeight)
+				return ++rightHeight;
+			else
+				return ++leftHeight;
+		}
 	}
 	public Node<T> getRoot()
 	{
