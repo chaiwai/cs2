@@ -22,6 +22,8 @@ public class Treap<T extends Comparable<T>>
 {
 	private int size = 0;
 	private Node<T> root;
+	
+	// stores treap priority values in a hashset
 	HashSet<Integer> prioritySet;
 	
 	public Treap()
@@ -29,9 +31,11 @@ public class Treap<T extends Comparable<T>>
 		prioritySet = new HashSet<Integer>();
 	}
 	
-//	Add data to the treap. Do not allow insertion of duplicate values. You will have to generate a
-//	random priority for this node. Find an efficient way to ensure that no duplicate priorities are
-//	generated, which uses no more than O(n) extra memory.
+	/* Add data to the treap. Do not allow insertion of duplicate values. You will have to generate a
+	random priority for this node. Find an efficient way to ensure that no duplicate priorities are
+	generated, which uses no more than O(n) extra memory. */
+	
+	// adds data to the treap. no else statement ensures no duplicate values
 	public void add(T data)
 	{
 		if (!contains(root, data))
@@ -41,32 +45,32 @@ public class Treap<T extends Comparable<T>>
 		}
 	}
 	
-//	Insert data into the treap (as above), but do not generate a random node priority for the new
-//	node. Instead, let the programmer (me) pass the priority as a parameter. I’ll use this to test your
-//	code with my own sequence of not-so-random priorities.
+	/* Insert data into the treap (as above), but do not generate a random node priority for the new
+	node. Instead, let the programmer (me) pass the priority as a parameter. I’ll use this to test 		your code with my own sequence of not-so-random priorities. */
+	
 	public void add(T data, int priority)
 	{
 		if (!contains(root, data))
-		{
 			root = add(root, data, priority);
-		}
 	}
 	
 	private Node<T> add(Node<T> root, T data, int priority)
 	{
-		// if the bst is empty, a root node is set
+		// if the treap is empty, a root node is set
 		if (root == null)
 		{
-			//instantiates a new node with data and increments treap size
+			// instantiates a new node with data after incrementing treap size
 			this.size++;
 			return new Node<T> (data, priority);
 		}
+		
 		// if the new node is <, it is placed to the left using the compareTo method
 		// if data is less than root.data it will return a negative #
 		else if (data.compareTo(root.data) < 0 )
 		{
 			root.left = add(root.left, data, priority);
-			// rotation
+			
+			// rotation of priority to maintain heapiness
 			if (root.left.priority < root.priority)
 			{
 				Node<T> child = root.left;
@@ -79,6 +83,8 @@ public class Treap<T extends Comparable<T>>
 		else if (data.compareTo(root.data) > 0 )
 		{
 			root.right = add(root.right, data, priority);
+			
+			// rotation of priority to maintain heapiness
 			if (root.right.priority < root.priority)
 			{
 				Node<T> child = root.right;
@@ -90,27 +96,46 @@ public class Treap<T extends Comparable<T>>
 		}
 		else
 		{
-			// Stylistically, I have this here to explicitly state that we are
-			// disallowing insertion of duplicate values. This is unconventional.
+			// this disallows duplicates
 			;
 		}
 
 		return root;
 	}
 	
-//	Delete data from the treap (if it is present).
+	/* Delete data from the treap (if it is present). */
 	public void remove(T data)
-	{
+	{	
+		// no else statement will disregard values not in the treap
 		if (contains(root, data))
 			root = remove(root, data);
 	}
 	
 	private Node<T> remove(Node<T> root, T data)
 	{
-		return null; //for now
+		if (root == null)
+			return null;
+		
+		else if (data.compareTo(root.data) < 0)
+			root.left = remove(root.left, data);
+		else if (data.compareTo(root.data) > 0)
+			root.right = remove(root.right, data);
+		else
+		{
+			if (root.left == null && root.right == null)
+			
+			else if (root.left == null)
+			
+			else if (root.right == null)
+			
+			else
+			{
+				//priority rotations
+			}
+		}
 	}
 	
-//	Return true if the treap contains data, false otherwise.
+	/* Return true if the treap contains data, false otherwise. */
 	public boolean contains(T data)
 	{
 		return contains(root, data);
@@ -119,31 +144,27 @@ public class Treap<T extends Comparable<T>>
 	private boolean contains(Node<T> root, T data)
 	{
 		if (root == null)
-		{
 			return false;
-		}
+		
 		// if data is less than root.data, look left
 		else if (data.compareTo(root.data) < 0 )
-		{
 			return contains(root.left, data);
-		}
+		
 		//if data is greater than root.data, look right
 		else if (data.compareTo(root.data) > 0 )
-		{
 			return contains(root.right, data);
-		}
+		
 		else
-		{
 			return true;
-		}
 	}
 	
-//	Return the number of elements in the treap in O(1) time.
+	/* Return the number of elements in the treap in O(1) time.*/
 	public int size()
 	{
-		return this.size; // does this work?	
+		return this.size;   
 	}
-//	Return the height of the treap. (An O(n) solution is fine here.)
+	
+	/* Return the height of the treap. (An O(n) solution is fine here.)*/
 	public int height()
 	{
 		return height(root);
@@ -155,8 +176,8 @@ public class Treap<T extends Comparable<T>>
 			return -1;
 		else
 		{
+			// recursively looks down each branch and increments the height
 			int leftHeight = height(root.left);
-			//System.out.println("left" + leftHeight);
 			int rightHeight = height(root.right);
 			
 			if (leftHeight < rightHeight)
@@ -170,29 +191,28 @@ public class Treap<T extends Comparable<T>>
 		return root;
 	}
 	
-	// generates a random number for a priority
+	// generates a random number for a priority from [1, Integer.MAX_VALUE]
 	public int getPriority()
 	{
 		int priority = (int)(Math.random()*(Integer.MAX_VALUE - 1) + 1);
+		
+		// looks for another random number if the priority is already used
 		while (prioritySet.contains(priority))
 			priority = (int)(Math.random()*(Integer.MAX_VALUE - 1) + 1);
+		
 		prioritySet.add(priority);
+		
 		return priority;
 	}
 	
 	public static double difficultyRating()
 	{
-		return 3.0; // change
+		return 3.0; 
 	}
 	
 	public static double hoursSpent()
 	{
-		return 3.0; // change
+		return 4.0; 
 	}
 	
-	public static void main (String [] args)
-	{
-	
-	}
-
 }
